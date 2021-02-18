@@ -24,7 +24,7 @@ def get_all_brands():
 @app.route('/brands/<int:id>')
 def get_brand_by_id(id):
     brand = data.get_brand_by_id(id)
-    if (brand != None):
+    if brand is not None:
         return jsonify(brand)
     return jsonify(error = "Brand id does not correspond with any products."), 404
 
@@ -39,7 +39,7 @@ def get_all_products():
 @app.route('/products/<int:id>')
 def get_product_by_id(id):
     product = data.get_product_by_id(id)
-    if (product != None):
+    if product is not None:
         return jsonify(product)
 
     return jsonify(error = "Product id does not correspond with any products."), 404
