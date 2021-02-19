@@ -1,4 +1,4 @@
-from graphene import ObjectType, String, Int, Field, List, Schema, Float
+from graphene import ObjectType, String, Int, Field, List, Schema, Float, Mutation, InputObjectType, Boolean
 import data
 
 class Product(ObjectType):
@@ -15,6 +15,12 @@ class Product(ObjectType):
     def resolve_parent(parent, info):
         return data.get_product_by_id(parent['parent_id'])
 
+class ProductInput(InputObjectType):
+    name = String(required=True)
+    price = Float(required=True)
+    stock = Int(required=True)
+    parent_id = Int()
+
 class Brand(ObjectType):
     id = Int()
     name = String()
@@ -22,6 +28,30 @@ class Brand(ObjectType):
 
     def resolve_products(parent, info):
         return data.get_products_by_brand(parent['id'])
+
+class AddBrand(Mutation):
+    class Arguments:
+        name = String(required=True)
+        products = List(ProductInput)
+
+    ok = Boolean()
+    brand = Field(Brand)
+
+    def mutate(root, info, name, **kwargs):
+        try:
+            new_brand = data.add_brand(name)
+            products = kwargs.get('products')
+
+            if products is not None:
+                for product in products:
+                    product['brand_id'] = new_brand['id']
+                    data.add_product(product)
+            return AddBrand(brand=new_brand, ok=True)
+        except:
+            return AddBrand(ok=False)
+
+class Mutations(ObjectType):
+    add_brand = AddBrand.Field()
 
 class Query(ObjectType):
     brands = List(Brand, name=String())
@@ -49,4 +79,4 @@ class Query(ObjectType):
     def resolve_product(root, info, id):
         return data.get_product_by_id(id)
 
-schema = Schema(query = Query)
+schema = Schema(query=Query, mutation=Mutations)

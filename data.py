@@ -92,6 +92,13 @@ def get_brands_by_name(name) :
 
     return output
 
+def add_brand(name):
+    id = data['brands'][-1]['id'] + 1
+    brand = {'id': id, 'name': name}
+
+    data['brands'].append(brand)
+    return brand
+
 def get_all_products() :
     return data['products']
 
@@ -117,3 +124,12 @@ def get_products_by_brand(brand_id):
             output.append(product)
 
     return output
+
+def add_product(product):
+    id = data['products'][-1]['id'] + 1
+    product['id'] = id
+    if 'parent_id' not in product.keys():
+        product['parent_id'] = None
+
+    data['products'].append(product)
+    return product
