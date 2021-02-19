@@ -72,3 +72,48 @@ data = {
         }
     ]
 }
+
+def get_all_brands() :
+    return data['brands']
+
+def get_brand_by_id(id) :
+    for brand in data['brands']:
+        if brand['id'] == id:
+            return brand
+
+    return None
+
+def get_brands_by_name(name) :
+    output = []
+
+    for brand in data['brands']:
+        if name.upper() in brand['name'].upper():
+            output.append(brand)
+
+    return output
+
+def get_all_products() :
+    return data['products']
+
+def get_product_by_id(id):
+    for product in data['products']:
+        if product['id'] == id:
+            return product
+
+    return None
+
+def get_products_by_name(name):
+    output = []
+    for product in data['products']:
+        if name.upper() in product['name'].upper():
+            output.append(product)
+
+    return output
+
+def get_products_by_brand(brand_id):
+    output = []
+    for product in data['products']:
+        if product['brand_id'] == brand_id:
+            output.append(product)
+
+    return output
