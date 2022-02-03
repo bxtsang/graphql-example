@@ -8,6 +8,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class BrandRepository {
@@ -30,5 +31,12 @@ public class BrandRepository {
             }
         }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+    }
+
+    public Brand addBrand(Map<String, String> brandInput) {
+        Brand newBrand = new Brand(BRANDS.size() + 1, brandInput.get("name"), brandInput.get("description"), brandInput.get("hq"));
+        BRANDS.add(newBrand);
+
+        return newBrand;
     }
 }
