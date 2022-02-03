@@ -2,15 +2,21 @@ data = {
     "brands": [
         {
             "id": 1,
-            "name": "Apple"
+            "name": "Apple",
+            "description": "I keep the doctor away if you eat one of me a day",
+            "hq": "California"
         },
         {
             "id": 2,
-            "name": "Huawei"
+            "name": "Huawei",
+            "description": "Chinese company that makes good mobile phones without Android",
+            "hq": "Shenzhen"
         },
         {
             "id": 3,
-            "name": "Dell"
+            "name": "Dell",
+            "description": "Company that makes decent laptops",
+            "hq": "Texas"
         }
     ],
     "products": [

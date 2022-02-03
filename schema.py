@@ -1,6 +1,7 @@
 from graphene import ObjectType, String, Int, Field, List, Schema, Float, Mutation, InputObjectType, Boolean
 import data
 
+
 class Product(ObjectType):
     id = Int()
     name = String()
@@ -15,19 +16,24 @@ class Product(ObjectType):
     def resolve_parent(parent, info):
         return data.get_product_by_id(parent['parent_id'])
 
+
 class ProductInput(InputObjectType):
     name = String(required=True)
     price = Float(required=True)
     stock = Int(required=True)
     parent_id = Int()
 
+
 class Brand(ObjectType):
     id = Int()
     name = String()
+    description = String()
+    hq = String()
     products = List(Product)
 
     def resolve_products(parent, info):
         return data.get_products_by_brand(parent['id'])
+
 
 class AddBrand(Mutation):
     class Arguments:
@@ -50,8 +56,10 @@ class AddBrand(Mutation):
         except:
             return AddBrand(ok=False)
 
+
 class Mutations(ObjectType):
     add_brand = AddBrand.Field()
+
 
 class Query(ObjectType):
     brands = List(Brand, name=String())
@@ -78,5 +86,6 @@ class Query(ObjectType):
 
     def resolve_product(root, info, id):
         return data.get_product_by_id(id)
+
 
 schema = Schema(query=Query, mutation=Mutations)
