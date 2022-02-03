@@ -1,0 +1,22 @@
+type Query {
+    brands(idFilter: Int): [Brand]
+}
+
+type Brand {
+    id: Int
+    name: String
+    description: String
+    hq: String
+    products: [Product]
+}
+
+type Product {
+    id: Int
+    name: String
+    brand: Brand
+    stock: Int
+}
+
+type Mutation {
+    addBrand(name: String, description: String, hq: String): Brand
+}
