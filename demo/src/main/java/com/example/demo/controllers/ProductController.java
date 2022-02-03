@@ -23,4 +23,9 @@ public class ProductController {
     public Product getProductById(@PathVariable Integer id) {
         return productRepository.getProduct(id);
     }
+
+    @GetMapping("/brands/{id}/products")
+    public List<Product> getProductByBrand(@PathVariable Integer id) {
+        return productRepository.getProductsByBrand(id);
+    }
 }

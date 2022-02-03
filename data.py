@@ -2,15 +2,21 @@ data = {
     "brands": [
         {
             "id": 1,
-            "name": "Apple"
+            "name": "Apple",
+            "description": "I keep the doctor away if you eat one of me a day",
+            "hq": "California"
         },
         {
             "id": 2,
-            "name": "Huawei"
+            "name": "Huawei",
+            "description": "Chinese company with pretty good phones but no Android",
+            "hq": "Shenzhen"
         },
         {
             "id": 3,
-            "name": "Dell"
+            "name": "Dell",
+            "description": "I make pretty good laptops",
+            "hq": "Texas"
         }
     ],
     "products": [
@@ -120,7 +126,7 @@ def get_products_by_name(name):
 def get_products_by_brand(brand_id):
     output = []
     for product in data['products']:
-        if product['brand_id'] == brand_id:
+        if product['brand'] == brand_id:
             output.append(product)
 
     return output

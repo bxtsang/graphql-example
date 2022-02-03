@@ -13,9 +13,9 @@ import java.util.List;
 public class BrandRepository {
     List<Brand> BRANDS = new ArrayList<>(
             Arrays.asList(
-                    new Brand(1, "Apple"),
-                    new Brand(2, "Huawei"),
-                    new Brand(3, "Dell")
+                    new Brand(1, "Apple", "I keep the doctor away if you eat one of me a day", "California"),
+                    new Brand(2, "Huawei", "Chinese company with pretty good phones but no Android", "Shenzhen"),
+                    new Brand(3, "Dell", "I make pretty good laptops", "Texas")
             )
     );
 

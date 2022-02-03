@@ -58,4 +58,16 @@ public class ProductRepository {
 
         throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
+
+    public List<Product> getProductsByBrand(Integer brandId) {
+        List<Product> products = new ArrayList<>();
+
+        for (Product product: PRODUCTS) {
+            if (product.getBrand().getId() == brandId) {
+                products.add(product);
+            }
+        }
+
+        return products;
+    }
 }

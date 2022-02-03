@@ -40,5 +40,9 @@ def get_product_by_id(id):
 def get_products_by_name(name):
     return jsonify(data.get_products_by_name(name))
 
+@app.route('/brands/<int:id>/products')
+def get_products_by_brand(id):
+    return jsonify(data.get_products_by_brand(id))
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=8081, debug=True)
