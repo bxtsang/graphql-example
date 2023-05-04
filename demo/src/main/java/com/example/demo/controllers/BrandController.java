@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,17 +19,17 @@ public class BrandController {
     BrandRepository brandRepository;
 
     @GetMapping("/brands")
-    public List<Brand> getAllBrands() {
-        return brandRepository.getAllBrands();
+    public Map<String, List<Brand>> getAllBrands() {
+        return new HashMap<>() {{ put("brands", brandRepository.getAllBrands()); }};
     }
 
     @GetMapping("/brands/{id}")
-    public Brand getBrandById(@PathVariable Integer id) {
-        return brandRepository.getBrand(id);
+    public Map<String, Brand> getBrandById(@PathVariable Integer id) {
+        return new HashMap<>() {{ put("brands", brandRepository.getBrand(id)); }};
     }
 
     @PostMapping("/brands")
-    public Brand addBrand(Map<String, String> brandInput) {
-        return brandRepository.addBrand(brandInput);
+    public Map<String, Brand> addBrand(Map<String, String> brandInput) {
+        return new HashMap<>() {{ put("brands", brandRepository.addBrand(brandInput)); }};
     }
  }
